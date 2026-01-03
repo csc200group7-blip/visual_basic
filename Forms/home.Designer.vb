@@ -175,7 +175,7 @@ Partial Class Form1
         Controls.Add(txtItem)
         Controls.Add(BtnAddItem)
         Name = "Form1"
-        Text = "Form1"
+        Text = "Home"
         CType(ItemsList, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()

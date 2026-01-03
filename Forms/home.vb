@@ -6,7 +6,7 @@
         Dim price As Decimal
 
         itemCount += 1
-        ItemsList.Rows.Add(itemCount, "Book", 5, 2500.0)
+        'ItemsList.Rows.Add(itemCount, "Book", 5, 2500.0)
 
         If itemCount > 10 Then
             MessageBox.Show("Exceeded maximum number of items")
@@ -21,9 +21,11 @@
         End If
 
         If Not Integer.TryParse(txtQuantity.Text, qty) Then
-            MessageBox.Show("Please enter a valid quantity.")
+            MessageBox.Show("Quantity must be a number.")
             txtQuantity.Focus()
             Exit Sub
+        Else
+            qty = txtQuantity.Text
         End If
 
         If qty <= 0 Then
@@ -33,9 +35,11 @@
         End If
 
         If Not Decimal.TryParse(txtPrice.Text, price) Then
-            MessageBox.Show("Please enter a valid price.")
+            MessageBox.Show("Price must be a number.")
             txtPrice.Focus()
             Exit Sub
+        Else
+            price = txtPrice.Text
         End If
 
         If price <= 0 Then
@@ -44,7 +48,14 @@
             Exit Sub
         End If
 
-        ItemsList.Rows.Add(itemCount, txtItem.Text, qty.ToString(), price.ToString("F2"))
+        Dim ItemExists As Object = InvoiceGenHelpers.CheckItemsExists(ItemsList, txtItem.Text)
+
+        If ItemExists And TypeOf ItemExists Is Integer Then
+            InvoiceGenHelpers.UpdateItemQty(ItemsList, ItemExists)
+        Else
+            ItemsList.Rows.Add(itemCount, txtItem.Text, qty, price)
+        End If
+
         ' Clear textboxes for next entry
         txtItem.Clear()
         txtQuantity.Clear()
@@ -52,9 +63,18 @@
         txtItem.Focus()
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles GenInvoiceBtn.Click
-        For Each item As DataGridViewRow In ItemsList.Rows
-            Debug.WriteLine(item.Cells(0))
+    Private Sub GenInvoiceBtn_Click(sender As Object, e As EventArgs) Handles GenInvoiceBtn.Click
+        Dim FormattedItems As New List(Of Dictionary(Of String, Decimal))
+        For Each row As DataGridViewRow In ItemsList.Rows
+            If row.IsNewRow Then Continue For
+            Dim ItemDict As New Dictionary(Of String, Decimal) From {
+                {"Quantity", row.Cells(2).Value},
+                {"Price", row.Cells(3).Value}
+            }
+            FormattedItems.Add(ItemDict)
         Next
+        InvoiceForm.Total = InvoiceGenHelpers.CalculateTotal(FormattedItems)
+        Me.Hide()
+        InvoiceForm.Show()
     End Sub
 End Class
