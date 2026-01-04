@@ -319,8 +319,8 @@ pdfGen.GeneratePdfFromHtml("John Doe", "123 Main St", "john@example.com", 150.00
        Dim RowIndex As Integer = 0
        For Each row As DataGridViewRow In ItemList.Rows
            If row.Cells(1).Value = NewItem Then
-               Exit For      ' BUG: This exits before return
-               Return RowIndex
+               Exit For      ' BUG: This exits the loop, making the Return statement unreachable
+               Return RowIndex  ' This line never executes, so function always returns False
            End If
            RowIndex += 1
        Next
@@ -590,4 +590,4 @@ For questions or issues, please contact the team or create an issue in the repos
 
 ---
 
-**Last Updated**: January 2026
+**Last Updated**: January 4, 2026
