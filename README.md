@@ -54,28 +54,6 @@ InvoiceGen/
 - .NET 10.0 SDK or later
 - Visual Studio 2022 (recommended) or Visual Studio Code with .NET extensions
 
-### Installation Steps
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/csc200group7-blip/visual_basic.git
-   cd visual_basic
-   ```
-
-2. **Restore NuGet packages**
-   ```bash
-   dotnet restore
-   ```
-
-3. **Build the project**
-   ```bash
-   dotnet build
-   ```
-
-4. **Run the application**
-   ```bash
-   dotnet run
-   ```
 
 ## Application Architecture
 
@@ -579,15 +557,3 @@ pdfGen.GeneratePdfFromHtml("John Doe", "123 Main St", "john@example.com", 150.00
 ### Tools
 - [Visual Studio 2022](https://visualstudio.microsoft.com/)
 - [.NET SDK](https://dotnet.microsoft.com/download)
-
-## License
-
-[Add license information here]
-
-## Contact
-
-For questions or issues, please contact the team or create an issue in the repository.
-
----
-
-**Last Updated**: January 4, 2026
