@@ -80,7 +80,7 @@ Partial Class Form1
         Label1.Name = "Label1"
         Label1.Size = New Size(82, 20)
         Label1.TabIndex = 5
-        Label1.Text = "Item Name"
+        Label1.Text = "Item"
         ' 
         ' Label2
         ' 
