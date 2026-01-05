@@ -48,10 +48,11 @@
             Exit Sub
         End If
 
-        Dim ItemExists As Object = InvoiceGenHelpers.CheckItemsExists(ItemsList, txtItem.Text)
 
-        If ItemExists And TypeOf ItemExists Is Integer Then
-            InvoiceGenHelpers.UpdateItemQty(ItemsList, ItemExists)
+        Dim ItemExists As Object = InvoiceGenHelpers.CheckItemsExists(ItemsList, txtItem.Text, price)
+        Debug.WriteLine(ItemExists, "Items exists")
+        If TypeOf ItemExists Is Integer Then
+            InvoiceGenHelpers.UpdateItemQty(ItemsList, ItemExists, qty)
         Else
             ItemsList.Rows.Add(itemCount, txtItem.Text, qty, price)
         End If
