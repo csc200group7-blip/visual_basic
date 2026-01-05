@@ -61,7 +61,15 @@ Partial Class InvoiceForm
         Me.InvoiceGrid.AllowUserToDeleteRows = False
         Me.InvoiceGrid.BackgroundColor = Color.White
         Me.InvoiceGrid.BorderStyle = BorderStyle.None
+        Me.InvoiceGrid.EnableHeadersVisualStyles = False
         Me.InvoiceGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.InvoiceGrid.Columns.AddRange(New DataGridViewColumn() {
+            New DataGridViewTextBoxColumn() With {.Name = "SNCol", .HeaderText = "S/N", .Width = 50, .ReadOnly = True},
+            New DataGridViewTextBoxColumn() With {.Name = "ItemCol", .HeaderText = "Item Name", .Width = 300, .ReadOnly = True},
+            New DataGridViewTextBoxColumn() With {.Name = "QuantityCol", .HeaderText = "Quantity", .Width = 100, .ReadOnly = True},
+            New DataGridViewTextBoxColumn() With {.Name = "PriceCol", .HeaderText = "Price", .Width = 120, .ReadOnly = True},
+            New DataGridViewTextBoxColumn() With {.Name = "SubtotalCol", .HeaderText = "Subtotal", .Width = 120, .ReadOnly = True}
+        })
         Me.InvoiceGrid.Location = New Point(20, 80)
         Me.InvoiceGrid.Name = "InvoiceGrid"
         Me.InvoiceGrid.ReadOnly = True
