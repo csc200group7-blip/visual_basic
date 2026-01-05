@@ -44,10 +44,13 @@ Partial Class Form1
         ' 
         BtnAddItem.Location = New Point(165, 404)
         BtnAddItem.Name = "BtnAddItem"
-        BtnAddItem.Size = New Size(219, 32)
+        BtnAddItem.Size = New Size(219, 40)
         BtnAddItem.TabIndex = 0
-        BtnAddItem.Text = "Add item"
-        BtnAddItem.UseVisualStyleBackColor = True
+        BtnAddItem.Text = "Add Item"
+        BtnAddItem.BackColor = System.Drawing.Color.Gainsboro
+        BtnAddItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        BtnAddItem.FlatAppearance.BorderSize = 0
+        BtnAddItem.UseVisualStyleBackColor = False
         ' 
         ' txtItem
         ' 
@@ -75,9 +78,9 @@ Partial Class Form1
         Label1.AutoSize = True
         Label1.Location = New Point(103, 303)
         Label1.Name = "Label1"
-        Label1.Size = New Size(39, 20)
+        Label1.Size = New Size(82, 20)
         Label1.TabIndex = 5
-        Label1.Text = "Item"
+        Label1.Text = "Item Name"
         ' 
         ' Label2
         ' 
@@ -102,6 +105,12 @@ Partial Class Form1
         ItemsList.AllowUserToAddRows = False
         ItemsList.AllowUserToDeleteRows = False
         ItemsList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        ItemsList.BackgroundColor = System.Drawing.Color.White
+        ItemsList.BorderStyle = BorderStyle.None
+        ItemsList.EnableHeadersVisualStyles = False
+        ItemsList.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.Gainsboro
+        ItemsList.ColumnHeadersDefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, FontStyle.Bold)
+        ItemsList.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         ItemsList.Columns.AddRange(New DataGridViewColumn() {IndexCol, ItemCol, QuantityCol, PriceCol, ActionCol})
         ItemsList.Location = New Point(39, 27)
         ItemsList.Name = "ItemsList"
@@ -155,16 +164,22 @@ Partial Class Form1
         ' 
         GenInvoiceBtn.Location = New Point(419, 404)
         GenInvoiceBtn.Name = "GenInvoiceBtn"
-        GenInvoiceBtn.Size = New Size(220, 32)
+        GenInvoiceBtn.Size = New Size(220, 40)
         GenInvoiceBtn.TabIndex = 9
         GenInvoiceBtn.Text = "Generate Invoice"
-        GenInvoiceBtn.UseVisualStyleBackColor = True
+        GenInvoiceBtn.BackColor = System.Drawing.Color.FromArgb(0, 120, 215)
+        GenInvoiceBtn.ForeColor = System.Drawing.Color.White
+        GenInvoiceBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        GenInvoiceBtn.FlatAppearance.BorderSize = 0
+        GenInvoiceBtn.UseVisualStyleBackColor = False
         ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(800, 450)
+        BackColor = System.Drawing.Color.WhiteSmoke
+        Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Controls.Add(GenInvoiceBtn)
         Controls.Add(ItemsList)
         Controls.Add(Label3)
