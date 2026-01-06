@@ -75,6 +75,20 @@
             FormattedItems.Add(ItemDict)
         Next
         InvoiceForm.Total = InvoiceGenHelpers.CalculateTotal(FormattedItems)
+        'Uncomment Code when cutomer details controls have been added to UI
+        'InvoiceForm.CustomerName = txtCustomerName.Text
+        'InvoiceForm.CustomerAddress = txtCustomerAddress.Text
+        'If TypeOf txtContactEmail.Text Is String Then
+        '    InvoiceForm.ContactEmail = txtContactEmail.Text
+        'Else
+        '    InvoiceForm.ContactEmail = Nothing
+        'End If
+        'If TypeOf txtContactPhone.Text Is String Then
+        '    InvoiceForm.ContactPhone = txtContactPhone.Text
+        'Else
+        '    InvoiceForm.ContactPhone = Nothing
+        'End If
+
         Me.Hide()
         InvoiceForm.Show()
     End Sub

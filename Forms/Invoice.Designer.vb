@@ -18,100 +18,112 @@ Partial Class InvoiceForm
     Private components As System.ComponentModel.IContainer
 
     Friend WithEvents lblTitle As Label
-    Friend WithEvents lblDate As Label
     Friend WithEvents lblTotal As Label
     Friend WithEvents InvoiceGrid As DataGridView
     Friend WithEvents BtnPrint As Button
 
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.lblTitle = New Label()
-        Me.lblDate = New Label()
-        Me.lblTotal = New Label()
-        Me.InvoiceGrid = New DataGridView()
-        Me.BtnPrint = New Button()
-
-        CType(Me.InvoiceGrid, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SuspendLayout()
-
-        '
+        lblTitle = New Label()
+        lblTotal = New Label()
+        InvoiceGrid = New DataGridView()
+        BtnPrint = New Button()
+        dtpInvoiceDate = New DateTimePicker()
+        Label1 = New Label()
+        CType(InvoiceGrid, ComponentModel.ISupportInitialize).BeginInit()
+        SuspendLayout()
+        ' 
         ' lblTitle
-        '
-        Me.lblTitle.AutoSize = True
-        Me.lblTitle.Font = New Font("Segoe UI", 14.0!, FontStyle.Bold)
-        Me.lblTitle.Location = New Point(20, 20)
-        Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New Size(170, 32)
-        Me.lblTitle.Text = "Invoice Preview"
-
-        '
-        ' lblDate
-        '
-        Me.lblDate.AutoSize = True
-        Me.lblDate.Font = New Font("Segoe UI", 9.0!)
-        Me.lblDate.Location = New Point(600, 30)
-        Me.lblDate.Name = "lblDate"
-        Me.lblDate.Size = New Size(120, 20)
-        Me.lblDate.Text = "Date: -- / -- / ----"
-
-        '
-        ' InvoiceGrid
-        '
-        Me.InvoiceGrid.AllowUserToAddRows = False
-        Me.InvoiceGrid.AllowUserToDeleteRows = False
-        Me.InvoiceGrid.BackgroundColor = Color.White
-        Me.InvoiceGrid.BorderStyle = BorderStyle.None
-        Me.InvoiceGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.InvoiceGrid.Location = New Point(20, 80)
-        Me.InvoiceGrid.Name = "InvoiceGrid"
-        Me.InvoiceGrid.ReadOnly = True
-        Me.InvoiceGrid.RowHeadersVisible = False
-        Me.InvoiceGrid.Size = New Size(740, 260)
-
-        '
+        ' 
+        lblTitle.AutoSize = True
+        lblTitle.Font = New Font("Segoe UI Semibold", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblTitle.Location = New Point(20, 20)
+        lblTitle.Name = "lblTitle"
+        lblTitle.Size = New Size(176, 31)
+        lblTitle.TabIndex = 4
+        lblTitle.Text = "Invoice Preview"
+        ' 
         ' lblTotal
-        '
-        Me.lblTotal.AutoSize = True
-        Me.lblTotal.Font = New Font("Segoe UI", 11.0!, FontStyle.Bold)
-        Me.lblTotal.Location = New Point(20, 360)
-        Me.lblTotal.Name = "lblTotal"
-        Me.lblTotal.Size = New Size(160, 25)
-        Me.lblTotal.Text = "Total Amount: ₦0.00"
-
-        '
+        ' 
+        lblTotal.AutoSize = True
+        lblTotal.Font = New Font("Segoe UI", 11F, FontStyle.Bold)
+        lblTotal.Location = New Point(20, 360)
+        lblTotal.Name = "lblTotal"
+        lblTotal.Size = New Size(194, 25)
+        lblTotal.TabIndex = 1
+        lblTotal.Text = "Total Amount: ₦0.00"
+        ' 
+        ' InvoiceGrid
+        ' 
+        InvoiceGrid.AllowUserToAddRows = False
+        InvoiceGrid.AllowUserToDeleteRows = False
+        InvoiceGrid.BackgroundColor = Color.White
+        InvoiceGrid.BorderStyle = BorderStyle.None
+        InvoiceGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        InvoiceGrid.Location = New Point(20, 80)
+        InvoiceGrid.Name = "InvoiceGrid"
+        InvoiceGrid.ReadOnly = True
+        InvoiceGrid.RowHeadersVisible = False
+        InvoiceGrid.RowHeadersWidth = 51
+        InvoiceGrid.Size = New Size(740, 260)
+        InvoiceGrid.TabIndex = 2
+        ' 
         ' BtnPrint
-        '
-        Me.BtnPrint.BackColor = Color.FromArgb(0, 120, 215)
-        Me.BtnPrint.FlatAppearance.BorderSize = 0
-        Me.BtnPrint.FlatStyle = FlatStyle.Flat
-        Me.BtnPrint.Font = New Font("Segoe UI", 9.0!, FontStyle.Bold)
-        Me.BtnPrint.ForeColor = Color.White
-        Me.BtnPrint.Location = New Point(560, 355)
-        Me.BtnPrint.Name = "BtnPrint"
-        Me.BtnPrint.Size = New Size(200, 40)
-        Me.BtnPrint.Text = "Print / Export Invoice"
-        Me.BtnPrint.UseVisualStyleBackColor = False
-
-        '
+        ' 
+        BtnPrint.BackColor = Color.FromArgb(CByte(0), CByte(120), CByte(215))
+        BtnPrint.FlatAppearance.BorderSize = 0
+        BtnPrint.FlatStyle = FlatStyle.Flat
+        BtnPrint.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
+        BtnPrint.ForeColor = Color.White
+        BtnPrint.Location = New Point(560, 355)
+        BtnPrint.Name = "BtnPrint"
+        BtnPrint.Size = New Size(200, 40)
+        BtnPrint.TabIndex = 0
+        BtnPrint.Text = "Print / Export Invoice"
+        BtnPrint.UseVisualStyleBackColor = False
+        ' 
+        ' dtpInvoiceDate
+        ' 
+        dtpInvoiceDate.CalendarFont = New Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        dtpInvoiceDate.Font = New Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        dtpInvoiceDate.Format = DateTimePickerFormat.Short
+        dtpInvoiceDate.Location = New Point(632, 21)
+        dtpInvoiceDate.Name = "dtpInvoiceDate"
+        dtpInvoiceDate.Size = New Size(128, 30)
+        dtpInvoiceDate.TabIndex = 5
+        ' 
+        ' Label1
+        ' 
+        Label1.AutoSize = True
+        Label1.Font = New Font("Segoe UI Semibold", 11F, FontStyle.Bold)
+        Label1.Location = New Point(572, 23)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(58, 25)
+        Label1.TabIndex = 6
+        Label1.Text = "Date:"
+        ' 
         ' InvoiceForm
-        '
-        Me.AutoScaleDimensions = New SizeF(8.0!, 20.0!)
-        Me.AutoScaleMode = AutoScaleMode.Font
-        Me.ClientSize = New Size(800, 450)
-        Me.BackColor = Color.White
-        Me.Controls.Add(Me.BtnPrint)
-        Me.Controls.Add(Me.lblTotal)
-        Me.Controls.Add(Me.InvoiceGrid)
-        Me.Controls.Add(Me.lblDate)
-        Me.Controls.Add(Me.lblTitle)
-        Me.Font = New Font("Segoe UI", 9.0!)
-        Me.Name = "InvoiceForm"
-        Me.Text = "Invoice"
-
-        CType(Me.InvoiceGrid, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+        ' 
+        AutoScaleDimensions = New SizeF(8F, 20F)
+        AutoScaleMode = AutoScaleMode.Font
+        BackColor = Color.White
+        ClientSize = New Size(800, 450)
+        Controls.Add(Label1)
+        Controls.Add(dtpInvoiceDate)
+        Controls.Add(BtnPrint)
+        Controls.Add(lblTotal)
+        Controls.Add(InvoiceGrid)
+        Controls.Add(lblTitle)
+        Font = New Font("Segoe UI", 9F)
+        Name = "InvoiceForm"
+        Text = "Invoice"
+        CType(InvoiceGrid, ComponentModel.ISupportInitialize).EndInit()
+        ResumeLayout(False)
+        PerformLayout()
 
     End Sub
+
+    Friend WithEvents dtpInvoiceDate As DateTimePicker
+    Friend WithEvents Label1 As Label
 
 End Class
