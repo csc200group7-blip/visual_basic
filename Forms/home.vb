@@ -74,15 +74,11 @@
             }
             FormattedItems.Add(ItemDict)
         Next
+
         InvoiceForm.Total = InvoiceGenHelpers.CalculateTotal(FormattedItems)
-        'Uncomment Code when cutomer details controls have been added to UI
-        'InvoiceForm.CustomerName = txtCustomerName.Text
-        'InvoiceForm.CustomerAddress = txtCustomerAddress.Text
-        'If TypeOf txtContactEmail.Text Is String Then
-        '    InvoiceForm.ContactEmail = txtContactEmail.Text
-        'Else
-        '    InvoiceForm.ContactEmail = Nothing
-        'End If
+        InvoiceForm.CustomerName = txtCustomerName.Text
+        InvoiceForm.CustomerAddress = txtCustomerAddress.Text
+        InvoiceForm.ContactEmail = txtContactEmail.Text
         'If TypeOf txtContactPhone.Text Is String Then
         '    InvoiceForm.ContactPhone = txtContactPhone.Text
         'Else
@@ -92,4 +88,23 @@
         Me.Hide()
         InvoiceForm.Show()
     End Sub
+
+    Private Sub Home_Resize(Sender As Object, e As EventArgs) Handles Me.Paint
+        Dim PanelWidth = itemListPanel.Size.Width
+        Dim ListContainerWidth = ItemsList.Size.Width
+        Dim FormSizeHeight = Me.Size.Height
+
+        Dim WidthDiff = PanelWidth - ListContainerWidth
+
+        ItemsList.Left = WidthDiff / 2
+
+        itemListPanel.Height = FormSizeHeight + 35 / 2
+        ItemsList.Height = FormSizeHeight / 2
+        InfoPanel.Width = Me.Size.Width
+        InfoInnerPanel.Left = (InfoPanel.Width - InfoInnerPanel.Width) / 2
+        GenPanel.Left = (InfoInnerPanel.Width - GenInvoiceBtn.Width) / 2
+        AddPanel.Left = (InfoInnerPanel.Width - BtnAddItem.Width) / 2
+        ItemInfoPanel.Left = (InfoInnerPanel.Width - ItemInfoPanel.Width) / 2
+    End Sub
+
 End Class

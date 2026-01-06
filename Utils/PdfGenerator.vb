@@ -8,7 +8,7 @@ Public Class PdfGenerator
     Private ReadOnly pdfFilePath As String = "Invoice.pdf"
 
     Public Sub GeneratePdfFromHtml(CustomerName As String, CustomerAddress As String,
-                                   CustomerEmail As String, Total As Decimal)
+                                   CustomerEmail As String, CustomerPhone As Object, Total As Decimal)
         Dim htmlContent As String = File.ReadAllText(htmlFilePath)
         htmlContent = htmlContent.Replace("{{CustomerName}}", CustomerName)
         htmlContent = htmlContent.Replace("{{CustomerEmail}}", CustomerEmail)
