@@ -36,7 +36,7 @@ Partial Class Form1
         ItemCol = New DataGridViewTextBoxColumn()
         QuantityCol = New DataGridViewTextBoxColumn()
         PriceCol = New DataGridViewTextBoxColumn()
-        ActionCol = New DataGridViewTextBoxColumn()
+        ActionCol = New DataGridViewButtonColumn()
         GenInvoiceBtn = New Button()
         itemListPanel = New Panel()
         InfoPanel = New Panel()
@@ -44,10 +44,8 @@ Partial Class Form1
         txtItem = New TextBox()
         InfoInnerPanel = New Panel()
         Panel3 = New Panel()
-        Label6 = New Label()
         Label5 = New Label()
         Label4 = New Label()
-        txtContactEmail = New TextBox()
         txtCustomerAddress = New TextBox()
         txtCustomerName = New TextBox()
         GenPanel = New Panel()
@@ -125,7 +123,7 @@ Partial Class Form1
         ItemsList.BorderStyle = BorderStyle.None
         DataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle1.BackColor = Color.Gainsboro
-        DataGridViewCellStyle1.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
+        DataGridViewCellStyle1.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold)
         DataGridViewCellStyle1.ForeColor = SystemColors.WindowText
         DataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight
         DataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText
@@ -135,7 +133,7 @@ Partial Class Form1
         ItemsList.Columns.AddRange(New DataGridViewColumn() {IndexCol, ItemCol, QuantityCol, PriceCol, ActionCol})
         DataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle2.BackColor = SystemColors.Window
-        DataGridViewCellStyle2.Font = New Font("Segoe UI", 9F)
+        DataGridViewCellStyle2.Font = New Font("Segoe UI", 9.0F)
         DataGridViewCellStyle2.ForeColor = SystemColors.ControlText
         DataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight
         DataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText
@@ -195,6 +193,8 @@ Partial Class Form1
         ActionCol.MinimumWidth = 35
         ActionCol.Name = "ActionCol"
         ActionCol.ReadOnly = True
+        ActionCol.Text = "Delete"
+        ActionCol.UseColumnTextForButtonValue = True
         ActionCol.Width = 126
         ' 
         ' GenInvoiceBtn
@@ -267,25 +267,14 @@ Partial Class Form1
         ' 
         ' Panel3
         ' 
-        Panel3.Controls.Add(Label6)
         Panel3.Controls.Add(Label5)
         Panel3.Controls.Add(Label4)
-        Panel3.Controls.Add(txtContactEmail)
         Panel3.Controls.Add(txtCustomerAddress)
         Panel3.Controls.Add(txtCustomerName)
         Panel3.Location = New Point(235, 169)
         Panel3.Name = "Panel3"
         Panel3.Size = New Size(618, 186)
         Panel3.TabIndex = 8
-        ' 
-        ' Label6
-        ' 
-        Label6.AutoSize = True
-        Label6.Location = New Point(22, 133)
-        Label6.Name = "Label6"
-        Label6.Size = New Size(56, 20)
-        Label6.TabIndex = 6
-        Label6.Text = "Email *"
         ' 
         ' Label5
         ' 
@@ -305,13 +294,6 @@ Partial Class Form1
         Label4.TabIndex = 4
         Label4.Text = "Individual / Company Name *"
         ' 
-        ' txtContactEmail
-        ' 
-        txtContactEmail.Location = New Point(19, 156)
-        txtContactEmail.Name = "txtContactEmail"
-        txtContactEmail.Size = New Size(582, 27)
-        txtContactEmail.TabIndex = 2
-        ' 
         ' txtCustomerAddress
         ' 
         txtCustomerAddress.Location = New Point(19, 97)
@@ -329,7 +311,7 @@ Partial Class Form1
         ' GenPanel
         ' 
         GenPanel.Controls.Add(GenInvoiceBtn)
-        GenPanel.Location = New Point(3, 361)
+        GenPanel.Location = New Point(259, 361)
         GenPanel.Name = "GenPanel"
         GenPanel.Size = New Size(560, 47)
         GenPanel.TabIndex = 7
@@ -337,21 +319,21 @@ Partial Class Form1
         ' AddPanel
         ' 
         AddPanel.Controls.Add(BtnAddItem)
-        AddPanel.Location = New Point(3, 114)
+        AddPanel.Location = New Point(259, 114)
         AddPanel.Name = "AddPanel"
         AddPanel.Size = New Size(557, 49)
         AddPanel.TabIndex = 7
         ' 
         ' Form1
         ' 
-        AutoScaleDimensions = New SizeF(8F, 20F)
+        AutoScaleDimensions = New SizeF(8.0F, 20.0F)
         AutoScaleMode = AutoScaleMode.Font
         AutoScroll = True
         BackColor = Color.WhiteSmoke
         ClientSize = New Size(1106, 890)
         Controls.Add(InfoPanel)
         Controls.Add(itemListPanel)
-        Font = New Font("Segoe UI", 9F)
+        Font = New Font("Segoe UI", 9.0F)
         Location = New Point(0, 20)
         MinimumSize = New Size(690, 580)
         Name = "Form1"
@@ -383,7 +365,7 @@ Partial Class Form1
     Friend WithEvents ItemCol As DataGridViewTextBoxColumn
     Friend WithEvents QuantityCol As DataGridViewTextBoxColumn
     Friend WithEvents PriceCol As DataGridViewTextBoxColumn
-    Friend WithEvents ActionCol As DataGridViewTextBoxColumn
+    Friend WithEvents ActionCol As DataGridViewButtonColumn
     Friend WithEvents itemListPanel As Panel
     Friend WithEvents InfoPanel As Panel
     Friend WithEvents InfoInnerPanel As Panel
