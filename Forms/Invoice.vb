@@ -1,10 +1,12 @@
 ﻿Public Class InvoiceForm
     Public CustomerName As String
     Public CustomerAddress As String
+    Public ContactEmail As String
+    Public ContactPhone As Integer
     Public Total As Decimal
 
     Private Const VatRate As Decimal = 0.075D
-    Private Const ShippingFlat As Decimal = 1500D
+    'Private Const ShippingFlat As Decimal = 1500D
 
     Private Sub InvoiceForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Header info
@@ -47,11 +49,11 @@
 
         ' Totals
         Dim vat As Decimal = subtotal * VatRate
-        Dim grandTotal As Decimal = subtotal + vat + ShippingFlat
+        Dim grandTotal As Decimal = subtotal + vat
 
         txtSubtotal.Text = $"Sub Total: {FormatCurrencyNaira(subtotal)}"
         txtTax.Text = $"Tax: {FormatCurrencyNaira(vat)}"
-        txtShipping.Text = FormatCurrencyNaira(ShippingFlat)
+        'txtShipping.Text = FormatCurrencyNaira(ShippingFlat)
         txtTotal.Text = $"Total: {FormatCurrencyNaira(grandTotal)}"
 
         ' Keep Total field synced for PDF
@@ -67,11 +69,55 @@
         Return "₦" & value.ToString("N2")
     End Function
 
-    Private Sub PrintBtn_Click(sender As Object, e As EventArgs)
+    Private Sub PrintBtn_Click(sender As Object, e As EventArgs) Handles PrintInvoiceBtn.Click
         Try
-            Dim generator As New PdfGenerator
-            generator.GeneratePdfFromHtml(CustomerName, CustomerAddress, Total)
-            MessageBox.Show("Invoice PDF generated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            ' Build items list for PDF
+            Dim itemsForPdf As New List(Of Dictionary(Of String, String))
+            For Each r As DataGridViewRow In InvoiceItems.Rows
+                If r.IsNewRow Then Continue For
+                Dim dict As New Dictionary(Of String, String) From {
+                    {"Index", Convert.ToString(r.Cells(0).Value)},
+                    {"Item", Convert.ToString(r.Cells(1).Value)},
+                    {"Quantity", Convert.ToString(r.Cells(2).Value)},
+                    {"Price", Convert.ToString(r.Cells(3).Value)},
+                    {"Total", Convert.ToString(r.Cells(4).Value)}
+                }
+                itemsForPdf.Add(dict)
+            Next
+
+            ' Compute totals (as numbers); format plain numbers for template
+            Dim subtotal As Decimal = 0D
+            For Each r As DataGridViewRow In InvoiceItems.Rows
+                If r.IsNewRow Then Continue For
+                Dim qty As Integer = 0
+                Integer.TryParse(Convert.ToString(r.Cells(2).Value), qty)
+                Dim price As Decimal = 0D
+                Decimal.TryParse(Convert.ToString(r.Cells(3).Value), price)
+                subtotal += qty * price
+            Next
+            Dim vat As Decimal = subtotal * VatRate
+            Dim shipping As Decimal = 0D ' no shipping applied currently
+            Dim grandTotal As Decimal = subtotal + vat + shipping
+
+            ' Extract invoice number only (without label prefix)
+            Dim invoiceNoText As String = lblInvoiceNo.Text
+            Dim invoiceNo As String = invoiceNoText
+            Dim colonIdx As Integer = invoiceNoText.IndexOf(":")
+            If colonIdx >= 0 AndAlso colonIdx + 1 < invoiceNoText.Length Then
+                invoiceNo = invoiceNoText.Substring(colonIdx + 1).Trim()
+            End If
+
+            'Dim generator As New PdfGenerator
+            PdfGenerator.GeneratePdfFromHtml(
+                CustomerName:=CustomerName,
+                CustomerAddress:=CustomerAddress,
+                ItemsList:=itemsForPdf,
+                SubTotal:=subtotal.ToString("F2"),
+                VAT:=vat.ToString("F2"),
+                ShippingFee:=shipping.ToString("F2"),
+                InvoiceNo:=invoiceNo,
+                Total:=grandTotal
+            )
         Catch ex As Exception
             MessageBox.Show("Failed to generate PDF: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -114,9 +160,5 @@
         End If
         PrintInvoiceBtn.Top = Panel3.ClientSize.Height - PrintInvoiceBtn.Height - 10
         PrintInvoiceBtn.Left = (formW - PrintInvoiceBtn.Width) \ 2
-    End Sub
-
-    Private Sub txtShipping_Click(sender As Object, e As EventArgs) Handles txtShipping.Click
-
     End Sub
 End Class

@@ -1,0 +1,256 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice</title>
+    <style>
+        :root {
+            --primary: #1f3b5b;
+            --border: #bfc8d6;
+            --light: #eef2f7;
+            --text: #111;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 40px 50px;
+            color: var(--text);
+            background: #fff;
+        }
+
+        .invoice {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 10px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 36px;
+            letter-spacing: 2px;
+            color: var(--primary);
+        }
+
+        .meta {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+            font-size: 15px;
+        }
+
+        .meta strong {
+            font-weight: 600;
+        }
+
+        /* Addresses */
+        .addresses {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .address-block {
+            width: 45%;
+        }
+
+        .address-title {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        /* Section title */
+        .section-title {
+            margin: 25px 0 10px;
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 18px;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+        }
+
+        thead th {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 10px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        tbody td {
+            border: 1px solid var(--border);
+            padding: 9px 10px;
+        }
+
+        tbody td:nth-child(1),
+        tbody td:nth-child(3) {
+            text-align: center;
+        }
+
+        tbody td:nth-child(4),
+        tbody td:nth-child(5) {
+            text-align: right;
+        }
+
+        tbody tr:last-child td:last-child {
+            font-weight: 700;
+        }
+
+        /* Totals */
+        .totals {
+            width: 360px;
+            margin-left: auto;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        .totals-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .totals-row strong {
+            font-weight: 700;
+        }
+
+        .grand-total {
+            color: var(--primary);
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        /* Footer */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 35px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer h4 {
+            margin: 0 0 8px;
+            color: var(--primary);
+        }
+
+        .footer ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+
+        .footer li {
+            margin-bottom: 6px;
+        }
+
+        em {
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+<div class="invoice">
+
+    <!-- Header -->
+    <div class="header">
+        <div></div>
+        <h1>INVOICE</h1>
+    </div>
+
+    <div class="meta">
+        <div><strong>Invoice No:</strong> {{InvoiceNumber}}</div>
+        <div><strong>Date:</strong> 06-Jan-2026</div>
+    </div>
+
+    <!-- Addresses -->
+    <div class="addresses">
+        <div class="address-block">
+            <div class="address-title">Bill To:</div>
+            {{CustomerName}}<br>
+            {{CustomerAddress}}
+        </div>
+    </div>
+
+    <!-- Items -->
+    <div class="section-title">Items Purchased</div>
+
+    <table>
+        <thead>
+        <tr>
+            <th style="width: 8%">S/N</th>
+            <th style="width: 42%">Item</th>
+            <th style="width: 12%">Quantity</th>
+            <th style="width: 18%">Unit Price (&#8358;)</th>
+            <th style="width: 20%">Total (&#8358;)</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{ItemsList}}
+        </tbody>
+    </table>
+
+    <!-- Totals -->
+    <div class="totals">
+        <div class="totals-row">
+            <span>Subtotal:</span>
+            <strong>&#8358;{{SubTotal}}</strong>
+        </div>
+        <div class="totals-row">
+            <span>VAT (7.5%):</span>
+            <strong>&#8358;{{VAT}}</strong>
+        </div>
+        <div class="totals-row">
+            <span>Shipping:</span>
+            <strong>&#8358;{{ShippingFee}}</strong>
+        </div>
+        <div class="totals-row grand-total">
+            <span>Grand Total:</span>
+            <span>&#8358;{{GrandTotal}}</span>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div>
+            <h4>Payment Terms:</h4>
+            <ul>
+                <li>Due on receipt</li>
+                <li>Bank Transfer to: First Bank, Account No: 1234567890</li>
+            </ul>
+        </div>
+
+        <div>
+            <h4>Notes:</h4>
+            <ul>
+                <li><em>Thank you for your purchase!</em></li>
+                <li><em>Keep this invoice for your records.</em></li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
